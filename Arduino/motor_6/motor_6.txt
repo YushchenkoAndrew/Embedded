@@ -1,0 +1,221 @@
+#include<SPI.h>
+#include<SD.h>
+
+File file;
+
+volatile byte i=2;
+
+boolean q=true,w=true,right=false,mistake=false,reopen=false,ends=false;
+char a1[72],a2[72];
+char b1[72],b2[72];
+byte ghj=0,number=0,number2=0;
+
+int pause[]=
+{
+  0,//2
+  510,//3
+  520,//1
+  520,//0
+  380,//5
+  570,//4
+};
+
+void setup()
+{
+//  Serial.begin(250000);
+  if (!SD.begin(4)) return;
+  pinMode(2,INPUT);
+  pinMode(3,INPUT);
+  pinMode(7,OUTPUT);
+  attachInterrupt(0, zero, FALLING);
+  attachInterrupt(1, sum, FALLING);
+  file=SD.open("empty.txt");
+  while (i != 0);
+  
+}
+void sum()
+{
+  i++;
+}
+
+void readfile2()
+{
+  if (file.available())
+  {
+    char h;
+    while ((h=file.read())&&(h != 'x'));
+    if (h == 'x')
+    {
+      if (right ==false)
+      {
+    b1[ghj]=file.read();
+    b2[ghj]=file.read();
+    ghj++;
+      }else
+      {
+    a1[ghj]=file.read();
+    a2[ghj]=file.read();
+    ghj++;
+      }
+    }
+  }
+  else
+  {reopen=true;file.close();ends=!ends;}
+
+}
+
+bool binary(char c, byte n)
+{
+  if((c >= '0')&&(c <= '9'))
+  switch(n)
+  {
+    case 0:return bool(c & 4);break;
+    case 1:return bool(c & 8);break;
+    case 2:return bool(c & 2);break;
+    case 3:return bool(c & 1);break;
+    case 4:return bool(c & 2);break;
+    case 5:return bool(c & 1);break;
+  }
+  else 
+  if((c >= 'A')&&(c <= 'F'))
+  {
+    byte r=c+1;
+    c=r;
+    switch(n)
+  {
+    case 3:return bool(c & 1);break;
+    case 2:return bool(c & 2);break;
+    case 0:
+    if ((c >= 'D')&&(c <= 'G'))
+    return 1;
+    else return 0;break;
+    case 1:return 1;break;
+    case 5:return bool(c & 1);break;
+    case 4:return bool(c & 2);break;
+  }
+  }
+}
+
+void zero()
+{
+  i=0;
+}
+
+void readhole()
+{
+  if((digitalRead(3) == LOW)&&(q == true))
+  {
+    i++;
+    q=false;
+  }
+  else
+  if (digitalRead(3) == HIGH) q=true;
+}
+//программа для счета
+/*
+void numbers(byte number)
+{
+  switch(number)
+    {
+    case 1:file=SD.open("one.txt");break;
+    case 2:file=SD.open("two.txt");break;
+    case 3:file=SD.open("three.txt");break;
+    case 4:file=SD.open("four.txt");break;
+    case 5:file=SD.open("five.txt");break;
+    case 6:file=SD.open("six.txt");break;
+    case 7:file=SD.open("seven.txt");break;
+    case 8:file=SD.open("eight.txt");break;
+    case 9:file=SD.open("nine.txt");break;
+    case 0:if(!ends) file=SD.open("zero.txt");else file=SD.open("empty.txt");break;
+    }
+}
+void screen()
+{
+   if (ends)
+   {
+    ghj=0;
+    right=!right;
+    if (number == 10) {number=0;number2=0;}
+    numbers(number);
+   }
+   else
+   {
+    numbers(number2);
+    number2++;
+    if (number2 == 10) {number2=0;number++;}
+   }
+}
+*/
+void screen2()
+{
+  ghj=0;
+  right=!right;
+  switch(number)
+  {
+    case 0:file=SD.open("screen1.txt");break;
+    case 1:file=SD.open("screen2.txt");break;
+    case 2:file=SD.open("screen3.txt");break;
+    case 3:file=SD.open("screen4.txt");break;
+    case 4:file=SD.open("screen5.txt");break;
+    case 5:file=SD.open("screen6.txt");break;
+    case 6:file=SD.open("screen7.txt");break;
+    case 7:file=SD.open("screen8.txt");break;
+    case 8:file=SD.open("screen9.txt");break;
+    case 9:file=SD.open("screen10.txt");break;
+    case 10:file=SD.open("screen11.txt");break;
+    case 11:file=SD.open("screen12.txt");break;
+    case 12:file=SD.open("screen13.txt");break;
+    case 13:file=SD.open("screen14.txt");break;
+    case 14:file=SD.open("screen15.txt");break;
+    case 15:file=SD.open("screen16.txt");break;
+    case 16:file=SD.open("screen17.txt");break;
+    case 17:file=SD.open("screen18.txt");break;
+  }
+  number++;
+  if (number == 18) number=0;
+}
+void loop()
+{
+   digitalWrite(7,0);
+   attachInterrupt(1, sum, FALLING);
+  if (!reopen)
+  {
+  readfile2();
+  while(i != 0);
+  }
+  else
+  {
+ //   screen();       //программа для счета
+    screen2();
+    reopen=false;
+  } 
+  detachInterrupt(1);
+  w=true;
+  while(i <= 30)
+  {
+    digitalWrite(7,0);
+    
+    byte n=i/6;
+    if(i % 6 != 0) w=true;
+    if ((i % 6 == 0)&&(w == true))
+    {
+     delayMicroseconds(pause[n]);
+      w=false;
+    for (int j=71; j>=0; j--)
+    {
+      bool b;
+      if ((n == 0)||(n == 1)||(n == 2)||(n == 3))
+      if (right == false)
+      b=binary(a2[j],n); 
+      else b=binary(b2[j],n); 
+      else 
+      if (right == false)b=binary(a1[j],n);
+      else b=binary(b1[j],n); 
+    digitalWrite(7,b); 
+    delayMicroseconds(10);
+     readhole();
+    }
+    }
+    readhole();
+  }
+}

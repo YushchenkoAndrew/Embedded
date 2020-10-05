@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sketch_march1a", "sketch_march1a.vcxproj", "{B11612B0-F3E1-496D-AE9C-EED3AA529ABD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sketch_feb19a", "..\sketch_feb19a\sketch_feb19a.vcxproj", "{C5F80730-F44F-4478-BDAE-6634EFC2CA88}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sketch_march5", "..\sketch_march5\sketch_march5.vcxproj", "{BAA96809-E38F-4759-913D-895F584BAF76}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B11612B0-F3E1-496D-AE9C-EED3AA529ABD}.Debug|x86.ActiveCfg = Debug|Win32
+		{B11612B0-F3E1-496D-AE9C-EED3AA529ABD}.Debug|x86.Build.0 = Debug|Win32
+		{B11612B0-F3E1-496D-AE9C-EED3AA529ABD}.Release|x86.ActiveCfg = Release|Win32
+		{B11612B0-F3E1-496D-AE9C-EED3AA529ABD}.Release|x86.Build.0 = Release|Win32
+		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Debug|x86.ActiveCfg = Debug|Win32
+		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Debug|x86.Build.0 = Debug|Win32
+		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x86.ActiveCfg = Release|Win32
+		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x86.Build.0 = Release|Win32
+		{BAA96809-E38F-4759-913D-895F584BAF76}.Debug|x86.ActiveCfg = Debug|Win32
+		{BAA96809-E38F-4759-913D-895F584BAF76}.Debug|x86.Build.0 = Debug|Win32
+		{BAA96809-E38F-4759-913D-895F584BAF76}.Release|x86.ActiveCfg = Release|Win32
+		{BAA96809-E38F-4759-913D-895F584BAF76}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E6934417-5B4E-4364-8027-C300060D0908}
+	EndGlobalSection
+EndGlobal
